@@ -10,13 +10,14 @@ const firebaseConfig = {
 
 const app = firebase.initializeApp(firebaseConfig);
 
-let UID = "";
 let playerRef;
+playerRef = DB.ref("/players/"+UID)
+
+let UID = "";
 let allPlayersRef;
 
 function initializeGame(){
     console.log(UID)
-    playerRef = DB.ref(`/players/${UID}`)
     playerRef.set({
         uid: UID,
         x: 0,
@@ -24,4 +25,9 @@ function initializeGame(){
         username: "GUEST",
     })
     allPlayersRef = DB.ref("/players");
+
+    const player = new Player;
+    setInterval(()=>{
+        player.update()
+    }, 1000/60)
 }
